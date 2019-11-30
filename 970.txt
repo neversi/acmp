@@ -1,0 +1,15 @@
+//970
+#include <iostream>
+using namespace std;
+int main()
+{
+  int w,h,r,sum=0;
+  cin>>w>>h>>r;
+  sum=w+h+r;
+  if(sum/2==w&&sum%2==0) cout<<"YES";
+  else if(sum/2==h&&sum%2==0) cout<<"YES";
+  else if(sum/2==r&&sum%2==0) cout<<"YES";
+  else cout<<"NO";
+   
+  return 0;
+}
