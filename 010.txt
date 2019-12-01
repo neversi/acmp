@@ -1,0 +1,21 @@
+//010
+#include <iostream>
+#include <bits/stdc++.h>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+int main()
+{
+  vector <int> res;
+  int a,b,c,d;
+  cin>>a>>b>>c>>d;
+  int sum=abs(a)+abs(b)+abs(c)+abs(d);
+  for (int i=(-sum);i<sum;i++)
+    if((a*pow(i,3)+b*pow(i,2)+c*i+d)==0)
+      res.push_back(i);
+  sort(res.begin(), res.end());
+  for(auto i: res)
+    cout<<i<<" ";
+  return 0;
+}
