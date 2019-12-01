@@ -1,0 +1,30 @@
+//009
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    int n,i,sum=0,maxi,mini,k=1;
+  cin>>n;
+  int arr[n];
+  int carr[n];
+  for(i=0;i<n;i++)
+  {
+      cin>>arr[i];
+   carr[i]=arr[i];
+   arr[i]>0?sum+=arr[i]:sum=sum;
+  }
+  sort(arr,arr+n);
+  for(i=0;i<n;i++)
+  {
+    if(carr[i]==arr[n-1]) maxi=i;
+    if(carr[i]==arr[0]) mini=i;}
+  if(maxi>mini)
+    for(i=mini+1;i<maxi;i++)
+      k*=carr[i];
+  else
+    for(i=maxi+1;i<mini;i++)
+        k*=carr[i];
+    cout<<sum<<" "<<k;
+    return 0;}
