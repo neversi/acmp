@@ -1,0 +1,143 @@
+#include <stdio.h>
+#include <string> 
+#include <vector>
+#include <bits/stdc++.h>
+
+class BigNumbers
+{
+public:
+	BigNumbers() {}
+	BigNumbers(std::string);//
+	BigNumbers(std::vector<int>);//
+	BigNumbers operator+ (BigNumbers&);
+	void print_vector();
+	std::vector<int> get_vector();//
+	std::string get_string();//
+private: 
+	std::vector<int> big_number;
+
+};
+
+BigNumbers::BigNumbers(std::string number_)
+{
+	for(unsigned int i=0; i<number_.length();i++)
+	{
+		big_number.push_back(number_[i]-48);
+	}
+}
+BigNumbers::BigNumbers(std::vector<int> num)
+{
+	big_number=num;
+}
+std::vector<int> BigNumbers::get_vector()
+{
+	return big_number;
+}
+
+std::string BigNumbers::get_string()
+{
+	std::string dummy="";
+	for(auto i: big_number)
+	{
+		char letter;
+		letter = i;
+		dummy+=letter;
+	}
+	return dummy;
+}
+void BigNumbers::print_vector()
+{
+	for(auto i: big_number)
+		std::cout<<i;
+}
+BigNumbers BigNumbers::operator+ ( BigNumbers& obj) 
+{
+	std::vector<int> num1;
+	std::vector<int> num2;
+	if(obj.get_vector().size()<big_number.size()) 
+		{
+			num1 = obj.get_vector();
+			num2 = big_number;
+			
+		} else {
+			num1 = big_number;
+			num2 = obj.get_vector();
+		}
+	int remainder=0;
+	std::vector<int> result; 
+	std::reverse(num1.begin(), num1.end());
+	std::reverse(num2.begin(), num2.end());
+	
+	auto j=num1.begin();
+	for(auto i=num2.begin(); i!=num2.end();i++)
+	{
+		*i+=remainder;
+		while(j!=num1.end())
+		{
+			int res = *i+*j;
+			if(res>=10)
+			{
+				result.push_back(res-10);
+				remainder=1;
+			} else {
+				result.push_back(res);
+				remainder=0;
+			}
+			j++;
+			break;
+		}
+		
+		if(j==num1.end())
+		{
+			if (num1.size()==num2.size())
+			{
+				
+				result.push_back(remainder);
+				if(result.at(result.size()-1)==0) result.pop_back();
+				std::reverse(result.begin(), result.end());
+				break;
+			} else {
+			for(std::vector<int>::iterator z = i+1;z!=num2.end();z++)
+			{
+				if(z==i+1)
+				{
+					result.push_back(*z+remainder);
+					continue;
+				}
+				result.push_back(*z);
+			}
+			}
+			std::reverse(result.begin(), result.end());
+			break;
+		}
+		}
+		
+	
+	return BigNumbers(result);
+}
+
+BigNumbers count1(int k, int n) {
+	++n;
+	BigNumbers counts[n];
+	for(int i = 0; i<n;i++)
+		counts[i]=BigNumbers("0");
+	counts[0]=BigNumbers("1");
+	for (int i = 1; i < n; ++i)
+		for (int j = 1; j <= std::min(k, i); ++j)
+			counts[i] = counts[i] + counts[i-j];
+ 
+	return counts[n - 1];
+}
+
+int main()
+{
+	int n, k;
+    std::cin>>k>>n;
+    BigNumbers t = count1(k,n);
+	
+	t.print_vector();
+	
+	
+    return 0;
+}
+
