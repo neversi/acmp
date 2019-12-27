@@ -1,0 +1,24 @@
+//013 Problem
+
+#include <iostream>
+#include <string>
+
+int main()
+{
+	std::string p, v;
+	int b=0,k=0; 
+	std::cin>>p>> v;
+	for(int i=0;i<p.length();i++)
+		for(int j=0;j<v.length();j++)
+		{
+			if(p[i]==v[j])
+			{
+				if(i==j)
+					b++;
+				else 
+					k++;
+			}
+		}
+	std::cout<<b<<" "<<k<<std::endl;
+	return 0;
+}
