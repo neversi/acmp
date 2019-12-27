@@ -1,0 +1,18 @@
+//Problem 014
+#include <bits/stdc++.h>
+
+
+int gcd (int a, int b) {
+if (b == 0)
+	return a;
+else
+	return gcd (b, a % b);
+}
+
+int main()
+{
+	int f, s,res;
+	std::cin>>f>>s;
+	res=f*s/gcd(f,s);
+	std::cout<<res;
+}
