@@ -1,0 +1,18 @@
+// Problem 15
+#include <iostream>
+
+int main()
+{
+	int num, sum=0;
+	std::cin>>num;
+	int gate[num][num];
+	for(int i=0;i<num;i++)
+		for(int j=0;j<num;j++)
+		{
+			std::cin>>gate[i][j];
+			if( i<j )
+				if(gate[i][j]==1) sum++;
+		} 
+	std::cout<<sum;
+	return 0;
+}
