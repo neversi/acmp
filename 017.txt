@@ -1,0 +1,54 @@
+// Problem 017 
+#include <bits/stdc++.h>
+#include <iostream>
+#include <vector> 
+
+int main()
+{
+	int counter = 0, num; 
+	std::cin>>num;
+	int line[num];
+	for(int i =0;i<num;i++) std::cin>>line[i];
+	
+	int k;
+	
+	for(int i =1; i<num;i++)
+	{
+		counter++;
+		if(line[0]==line[i])
+		{
+			if(i+counter+1>num)
+			{
+				int comp=0;
+				k=0;
+				for(int j = i;j<num;j++)
+				{
+					comp++;
+					if(line[j]==line[j-i])
+					{
+						k++;
+					}
+				}
+				if(k==comp) 
+        {std::cout<<counter; 
+        return 0;
+        }
+        else continue;
+			}
+			else 
+			{
+				int comp=0;
+				k=0;
+				for(int j=i;j<=i+counter;j++)
+				{
+					comp++;
+					if(line[j]==line[j-i]) k++;
+				}
+				if(k==comp) 
+        {std::cout<<counter; 
+        return 0;
+        }
+        else continue;
+	}}}
+	return 0;
+}
