@@ -1,54 +1,42 @@
-// Problem 017 
-#include <bits/stdc++.h>
-#include <iostream>
+//Problem 017
+#include <stdio.h> 
 #include <vector> 
-
+#include <cassert>
 int main()
 {
-	int counter = 0, num; 
-	std::cin>>num;
-	int line[num];
-	for(int i =0;i<num;i++) std::cin>>line[i];
-	
-	int k;
-	
-	for(int i =1; i<num;i++)
+	int n;
+	scanf("%d", &n);
+	std::vector<int> a(n);
+	for(int i = 0; i<n; i++)
 	{
-		counter++;
-		if(line[0]==line[i])
-		{
-			if(i+counter+1>num)
-			{
-				int comp=0;
-				k=0;
-				for(int j = i;j<num;j++)
-				{
-					comp++;
-					if(line[j]==line[j-i])
-					{
-						k++;
-					}
-				}
-				if(k==comp) 
-        {std::cout<<counter; 
-        return 0;
-        }
-        else continue;
+		scanf("%d", &a[i]);
+	}
+	std::vector<int> prefix(1+n, 0);
+	int len = 0; 
+	for(int i = 1; i<n; i++)
+	{
+		while(true){
+			if(a[len]==a[i]){
+				len++;
+			break;
 			}
-			else 
-			{
-				int comp=0;
-				k=0;
-				for(int j=i;j<=i+counter;j++)
-				{
-					comp++;
-					if(line[j]==line[j-i]) k++;
-				}
-				if(k==comp) 
-        {std::cout<<counter; 
-        return 0;
-        }
-        else continue;
-	}}}
-	return 0;
+			if(len==0) break;
+			len=prefix[len];
+		}
+		prefix[i+1] = len;
+	}
+	while(true)
+	{
+		int period = n - len;
+		if((n-1)%period == 0) {
+		printf("%d\n", period);
+		return 0;
+	}
+
+	assert(len>1);
+	len = prefix[len];
+	
+	}
+	
 }
+	
